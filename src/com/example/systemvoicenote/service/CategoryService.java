@@ -13,9 +13,10 @@ public class CategoryService {
     }
 
     public Category create(String name) {
-        int newId = uow.categories.getAll().size() + 1;
+        int newId = uow.categories.getNextId();           // ← правильно
         Category c = new Category(newId, name);
-        uow.categories.add(c.getId(), c);
+        uow.categories.add(c);                             // ← без id!
+        uow.commit();
         return c;
     }
 

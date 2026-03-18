@@ -1,15 +1,23 @@
 package com.example.systemvoicenote.repository;
 
-import java.util.*;
+import com.example.systemvoicenote.model.Category;
+import com.example.systemvoicenote.model.User;
+import com.example.systemvoicenote.model.VoiceNote;
 
 public class UnitOfWork {
-    public Repository<com.example.systemvoicenote.model.User> users = new Repository<>();
-    public Repository<com.example.systemvoicenote.model.Category> categories = new Repository<>();
-    public Repository<com.example.systemvoicenote.model.VoiceNote> notes = new Repository<>();
+    public final Repository<User> users;
+    public final Repository<Category> categories;
+    public final Repository<VoiceNote> notes;
+
+    public UnitOfWork() {
+        users = new Repository<>("users.json", User[].class);
+        categories = new Repository<>("categories.json", Category[].class);
+        notes = new Repository<>("notes.json", VoiceNote[].class);
+    }
 
     public void commit() {
-        com.example.systemvoicenote.util.JsonUtil.saveToFile("users.json", users.getAll());
-        com.example.systemvoicenote.util.JsonUtil.saveToFile("categories.json", categories.getAll());
-        com.example.systemvoicenote.util.JsonUtil.saveToFile("notes.json", notes.getAll());
+        users.save();
+        categories.save();
+        notes.save();
     }
 }

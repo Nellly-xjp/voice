@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataGenerator {
-
     private static final Faker faker = new Faker();
 
     public static List<User> generateUsers(int count) {
@@ -17,7 +16,7 @@ public class DataGenerator {
                   i,
                   faker.name().fullName(),
                   faker.internet().emailAddress(),
-                  "1234"
+                  "SecurePass" + (i + 1)   // валідний пароль
             ));
         }
         return list;
@@ -25,22 +24,22 @@ public class DataGenerator {
 
     public static List<Category> generateCategories() {
         return List.of(
-              new Category(1, "Робота"),
-              new Category(2, "Особисте"),
-              new Category(3, "Навчання")
+              new Category(0, "Робота"),
+              new Category(1, "Особисте"),
+              new Category(2, "Навчання")
         );
     }
 
-    public static List<VoiceNote> generateNotes(int count, int maxUserId, int maxCategoryId) {
+    public static List<VoiceNote> generateNotes(int count) {
         List<VoiceNote> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             list.add(new VoiceNote(
                   i,
                   faker.book().title(),
-                  "audio" + i + ".wav",
-                  faker.number().numberBetween(10, 300),
-                  faker.number().numberBetween(0, maxUserId),
-                  faker.number().numberBetween(1, maxCategoryId)
+                  "recordings/note_" + i + ".wav",
+                  faker.number().numberBetween(15, 240),
+                  faker.number().numberBetween(0, 4),
+                  faker.number().numberBetween(0, 2)
             ));
         }
         return list;

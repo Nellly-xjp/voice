@@ -4,5 +4,11 @@
     "name": "Марія Іванова",
     "email": "maria@test.com",
     "password": "abcd1234"
+  },
+  {
+    "id": 1,
+    "name": "olesa",
+    "email": "ola@gmail.com",
+    "password": "olaa2288"
   }
 ]
